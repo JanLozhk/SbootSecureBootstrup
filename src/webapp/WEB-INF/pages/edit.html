@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table>
+    <tr>
+        <!--<form action="#"
+      th:action="@{/edit/{id}(id=${user.id})}"
+      th:object="${user}"
+      th:modelAttribute="user"
+      method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="${user.name}" id="name" required>
+    <label for="character">Character</label>
+    <input type="text" th:field="${user.IQ}" id="IQ" required>
+    <input type="submit" value="Edit">
+</form>-->
+<!--        <td><form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}" ></td>-->
+        <td><form th:method="POST" th:action="@{/users}" th:object="${user}"></td><!--/{id}(id=${user.getId()})}"-->
+        <td><label for="name">Enter name</label></td>
+        <td><input type="text" th:field="*{firstName}" id="name"/></td>
+        <td><label for="SecondName">Enter SecondName</label></td>
+        <td><input type="text" th:field="*{lastName}" id="SecondName"/></td>
+        <td><label for="Email">Enter E-Mail</label></td>
+        <td><input type="text" th:field="*{email}" id="Email"/></td>
+        <td><input type="submit" value="Update"/></td>
+        <td><a th:href="@{/edit/{id}(id=${User.id})}">Edit</a></td>
+        <td><a th:href="@{/delete/{id}(id=${User.id})}">Delete</a></td>
+        <h2>Add</h2>
+        <a href="/add">Add new user</a>
+    </tr>
+    </form>
+</table>
+<div>
+    <div>
+        <form method="post" action="/login">
+            <input name="j_username"/>
+            <input name="j_password"/>
+            <input type="submit"/>
+        </form>
+    </div>
+</body>
+</html>

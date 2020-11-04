@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <table>
+        <th:block th:each="user : ${allUsers}">
+            <tr id="tr_id">
+                <td id="t_id" class="filterable-cell" th:text="${user.getId()}"></td>
+                <td><a th:href="@{/users/{id}(id=${user.getId()})}" id="t_name" class="filterable-cell" th:text="${user.getFirstName()}"></a>></td>
+                <td id="t_last_name" class="filterable-cell" th:text="${user.getLastName()}"></td>
+                <td id="t_email" class="filterable-cell" th:text="${user.getEmail()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
