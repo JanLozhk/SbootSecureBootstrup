@@ -58,7 +58,7 @@ public class UserController {
     @PostMapping
     public String createNewUser(@ModelAttribute("user") User user){
         userService.create(user);//add(user);//save(user);//add(user);
-        return "/users";
+        return "redirect:user/all";
     }
 
     @PostMapping("/{id}")
@@ -70,7 +70,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public String deleteUserById(@PathVariable Long id) {
         userService.delete(id);
-        return "/users";
+        return "redirect:all";
     }
 /*    @PostMapping
     public String create(@ModelAttribute("user") User user){

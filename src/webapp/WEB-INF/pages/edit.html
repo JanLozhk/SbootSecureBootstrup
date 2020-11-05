@@ -10,7 +10,7 @@
 <!--    <tr><a th:href="/user/all">BackToAllUsers</a></tr>-->
     <tr>
 <!--        <tr th:method="post" th:action="@{/edit/__*{id}__}" th:object="${user}">-->
-        <form th:method="patch" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}"><!--(id=${user.getId()}) ПРОВЕРИТЬ И ТАК *{id} ТОЖЕ, УДАЛИТЬ ЗАПУСТИТЬ ;)))) МОЖЕТ БЫТЬ-->
+        <form th:method="post" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}"><!--(id=${user.getId()}) ПРОВЕРИТЬ И ТАК *{id} ТОЖЕ, УДАЛИТЬ ЗАПУСТИТЬ ;)))) МОЖЕТ БЫТЬ-->
             <td><label for="id"></label></td>
             <td><input type="number" th:field="*{id}" id="id"/></td>
             <td><label for="name">Enter name</label></td>
