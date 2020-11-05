@@ -1,6 +1,7 @@
 package app.service;
 
 import app.model.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +10,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+//    User userNew = new User("Lokal", "Moka", "Toka");
 
     @PersistenceContext
     EntityManager entityManager;
@@ -20,21 +23,18 @@ public class UserServiceImpl implements UserService{
         entityManager.persist(user);
     }
 
-/*
-    @Override
-    public List<User> readAllUsers() {
-    }
-*/
-
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createQuery("from User", User.class).getResultList();
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Transactional
     @Override
-    public void update(User user, long id) {
-        entityManager.merge(user);
+    public void update(User toSave) {
+//        User user = findUserById(toSave.getId());
+//        BeanUtils.copyProperties(toSave, user);
+        entityManager.merge(toSave);
     }
 
 
@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserById(long id) {
+        System.out.println(entityManager.find(User.class, id));
         return entityManager.find(User.class, id);
     }
 

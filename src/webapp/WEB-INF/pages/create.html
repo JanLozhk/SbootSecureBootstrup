@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD_NEW_USER</title>
+</head>
+<body>
+<table>
+<form th:method="post" th:action="@{/user}" th:object="${user}">
+<!--    &lt;!&ndash;/{id}(id=${user.getId()})}"&ndash;&gt;&ndash;&gt;-->
+    <!--<td><label for="id"></label></td>
+    <td><input readonly type="number" th:field="*{id}" id="id"/></td> &lt;!&ndash;th:field = "..." private static String firstName&ndash;&gt;-->
+    <td><label for="name">Enter name</label></td>
+    <td><input type="text" th:field="*{firstName}" id="name"/></td> <!--th:field = "..." private static String firstName-->
+    <td><label for="SecondName">Enter SecondName</label></td>
+    <td><input type="text" th:field="*{lastName}" id="SecondName"/></td>
+    <td><label for="Email">Enter E-Mail</label></td>
+    <td><input type="text" th:field="*{email}" id="Email"/></td>
+    <td><input type="submit" value="Create"/></td>
+</body>
+</html>

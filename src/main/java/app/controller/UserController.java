@@ -2,18 +2,19 @@ package app.controller;
 
 import app.model.User;
 import app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userServiceImpl;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
    /* public UserController() {
         System.out.println("!!!");
@@ -28,53 +29,53 @@ public class UserController {
         return "users";
     }*/
 
-    @GetMapping//("/users")
-    public String helloPage(){//Model model){
-   //     model.addAttribute("allUsers", userServiceImpl.readAllUsers());
+    @GetMapping
+    public String helloPage() {
         return "/mainpage";
     }
 
-    @GetMapping("/getall")//("")
+    @GetMapping("/all")
     public String allUsers(Model model) {
-        model.addAttribute("allUsers", userServiceImpl.getAllUsers());
+        model.addAttribute("allUsers", userService.getAllUsers());
+        System.out.println("GetMapping_AllUsers" + userService.getAllUsers());
+        return "users";
+    }
+
+    @GetMapping("/{id}")
+    public String getEdit(Model model, @PathVariable Long id) {
+            User user = userService.findUserById(id);
+        System.out.println(user.toString());
+        System.out.println("model" + model);
+        model.addAttribute("user", user);
+        return "/edit";
+    }
+
+    @GetMapping("/new")
+    public String openPageNew(@ModelAttribute ("user") User user){
+        return "/create";
+    }
+
+    @PostMapping
+    public String createNewUser(@ModelAttribute("user") User user){
+        userService.create(user);//add(user);//save(user);//add(user);
         return "/users";
     }
 
-
-    @GetMapping(value = "/{id}")
-    public String findUserById(@PathVariable("id") long id, Model model) {
-        User user = userServiceImpl.findUserById(id);
-        model.addAttribute("user", user);
-        return "/user";
+    @PostMapping("/{id}")
+    public String postEdit(/*@PathVariable Long id,*/ @ModelAttribute() User user) {
+        userService.update(user);
+        return "redirect:all";//"users"; ВЫВОДИТ ОГРЫЗОК СТРАНИЦЫ USERS
     }
 
-   /* @GetMapping(value = "/add")
-    public String addPage(User user, ModelMap model) {
-        model.addAttribute("user", user);
-        return "addPage";
-    }
-*/
-    @PostMapping//(value = "/edit") //post request for edit.html
-    public String createUser(@ModelAttribute User user) {
-        userServiceImpl.create(user);
-        return "redirect:/users";
-    }
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable ("id") long id) {
-        userServiceImpl.update(user, id);
-        return "redirect:/users";
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public String deleteUser(@ModelAttribute("user") User user, @PathVariable("id") long id) {
-        userServiceImpl.delete(id);
-        return "redirect:/users";
+    @DeleteMapping("/{id}")
+    public String deleteUserById(@PathVariable Long id) {
+        userService.delete(id);
+        return "/users";
     }
 /*    @PostMapping
     public String create(@ModelAttribute("user") User user){
         userServiceImpl.create(user);//add(user);//save(user);//add(user);
-        return "/users";
+        return "/user";
     }
 
     @GetMapping("/{id}/edit")
@@ -86,13 +87,13 @@ public class UserController {
     @PatchMapping("/{id}")
     public String udgate(@ModelAttribute("user") User user, @PathVariable("id") long id){
         userServiceImpl.update(id, user);//update(id, user);//edit(user);
-        return "redirect:/users";
+        return "redirect:/user";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@ModelAttribute("user") User user, @PathVariable("id") long id){
         userServiceImpl.delete(id);
-        return "redirect:/users";
+        return "redirect:/user";
     }*/
 // public create(){
 

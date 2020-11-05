@@ -3,20 +3,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>SHOW_ALL_&_OPEN_CREATE_NEW_USER</title>
 </head>
 <body>
 <div>
     <table>
-        <th:block th:each="user : ${allUsers}">
+        <th:block th:each="user : ${allUsers}" th:object="${user}">
             <tr id="tr_id">
-                <td id="t_id" class="filterable-cell" th:text="${user.getId()}"></td>
-                <td><a th:href="@{/users/{id}(id=${user.getId()})}" id="t_name" class="filterable-cell" th:text="${user.getFirstName()}"></a>></td>
-                <td id="t_last_name" class="filterable-cell" th:text="${user.getLastName()}"></td>
-                <td id="t_email" class="filterable-cell" th:text="${user.getEmail()}"></td>
+                <td id="t_id" class="filterable-cell" th:text="*{id}"></td>
+                <td><a th:href="@{/user/__*{id}__}" id="t_name" class="filterable-cell" th:text="*{firstName}"></a></td>
+                <td id="t_last_name" class="filterable-cell" th:text="*{lastName}"></td>
+                <td id="t_email" class="filterable-cell" th:text="*{email}"></td>
             </tr>
         </th:block>
     </table>
 </div>
+<p><a href="/user/new" id="newUser">AddNewUser</a></p>
 </body>
 </html>

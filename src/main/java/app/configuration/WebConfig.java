@@ -13,7 +13,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "app")
+@ComponentScan("app")
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
@@ -44,4 +44,10 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
+    /*  @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        registry.viewResolver(resolver);
+    }*/
 }
