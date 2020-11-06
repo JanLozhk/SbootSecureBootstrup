@@ -4,28 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title>EDIT_USER</title>
+
 </head>
 <body>
 <table>
+    <tr align="right" valign="top">
 <!--    <tr><a th:href="/user/all">BackToAllUsers</a></tr>-->
-    <tr>
 <!--        <tr th:method="post" th:action="@{/edit/__*{id}__}" th:object="${user}">-->
         <form th:method="post" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}"><!--(id=${user.getId()}) ПРОВЕРИТЬ И ТАК *{id} ТОЖЕ, УДАЛИТЬ ЗАПУСТИТЬ ;)))) МОЖЕТ БЫТЬ-->
-            <td><label for="id"></label></td>
-            <td><input type="number" th:field="*{id}" id="id"/></td>
+            <th:block><label for="id"></label></th:block>
+            <th:block><input readonly type="number" th:field="*{id}" id="id"/></th:block>
             <td><label for="name">Enter name</label></td>
-            <td><input type="text" th:field="*{firstName}" id="name"/></td>
+            <td><input type="text" th:field="*{firstName}" id="name" required/></td>
             <td><label for="SecondName">Enter SecondName</label></td>
-            <td><input type="text" th:field="*{lastName}" id="SecondName"/></td>
+            <td><input type="text" th:field="*{lastName}" id="SecondName" required/></td>
             <td><label for="Email">Enter E-Mail</label></td>
-            <td><input type="text" th:field="*{email}" id="Email"/></td>
+            <td><input type="text" th:field="*{email}" id="Email" required/></td>
             <td><input type="submit" value="Update"/></td>
         </form>
         <form th:method="delete" th:action="@{/user/__*{id}__}" th:object = "${user}">
-            <td><input type="submit" value="Delete"/></td>
+            <td><input type="submit" value="Delete"/>
         </form>
-    <br>
-        <!--id="tBack" class="filterable-cell"-->
+            <td><a href="/user/all"><input type="button" value="BackToList"/></a></td>
+        </form>
     </tr>
 </table>
 </body>

@@ -1,6 +1,5 @@
 package app.configuration;
 
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
@@ -39,39 +37,6 @@ public class HibernateConfig {
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         return properties;
     }
-    /*Проперти файлы либо файлы свойств – предназначены, для того чтобы хранить в них какие-то статические данные необходимые проект, например логин и пароль к БД.
-
-Давайте добавим в наш config.properties логин и пароль (это любые данные, для того чтобы продемонстрировать работу с property файлами).
-
-Содержимое config.properties:
-
-db.host = http://localhost:8888/mydb
-db.login = root
-db.password = dbroot
-Как видите, данные представлены в виде {ключ} = {значение}, где
-
-{ключ} – это уникальное имя, по которому можно получить доступ к значению, хранимому под этим ключом.
-
-{значение} – это текст, либо число, которое вам необходимо для выполнения определённой логики в вашей программе.
-https://devcolibri.com/%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B9-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-property-%D1%84%D0%B0%D0%B9%D0%BB%D0%B0%D0%BC%D0%B8-%D0%B2-java/
- try {
-            //Создаем объект свойст
-            Properties properties = new Properties();
-            File file = new File("properties.properties");
-            //Загружаем свойства из файла
-            properties.load(new FileInputStream(file));
-            //Получаем в переменную значение конкретного свойства
-            String host = properties.getProperty("host");
-            //Устанавливаем значение свойста
-            properties.setProperty("host", "localhost:8080");
-            //Сохраняем свойства в файл.
-            properties.store(new FileOutputStream(file), null);
-        } catch (IOException e) {
-            e.printStackTrace();
-
-*/
-
-
 
     private String persistenceUnitName() {
         return getClass().getSimpleName();

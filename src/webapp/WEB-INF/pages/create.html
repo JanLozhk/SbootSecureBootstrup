@@ -7,18 +7,21 @@
 </head>
 <body>
 <table>
+    <tr>
 <form th:method="post" th:action="@{/user}" th:object="${user}">
 <!--    &lt;!&ndash;/{id}(id=${user.getId()})}"&ndash;&gt;&ndash;&gt;-->
     <!--<td><label for="id"></label></td>
     <td><input readonly type="number" th:field="*{id}" id="id"/></td> &lt;!&ndash;th:field = "..." private static String firstName&ndash;&gt;-->
     <td><label for="name">Enter name</label></td>
-    <td><input type="text" th:field="*{firstName}" id="name"/></td> <!--th:field = "..." private static String firstName-->
+    <td><input required type="text" th:field="*{firstName}" id="name"/></td> <!--th:field = "..." private static String firstName-->
     <td><label for="SecondName">Enter SecondName</label></td>
-    <td><input type="text" th:field="*{lastName}" id="SecondName"/></td>
+    <td><input required type="text" th:field="*{lastName}" id="SecondName"/></td>
     <td><label for="Email">Enter E-Mail</label></td>
-    <td><input type="text" th:field="*{email}" id="Email"/></td>
+    <td><input required type="text" th:field="*{email}" id="Email"/></td>
     <td><input type="submit" value="Create"/></td>
 </form>
+    <th ><a href="/user/all"><input type="button" value="BackToList"></a></th>
+    </tr>>
 </table>
 </body>
 </html>

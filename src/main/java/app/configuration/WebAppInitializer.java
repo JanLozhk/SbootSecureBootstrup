@@ -25,20 +25,19 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         };
     }
 
-
     /* Данный метод указывает url, на котором будет базироваться приложение */
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
 
-   /* @Override
+    @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         return new Filter[] {filter};
-    }*/
+    }
 
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
