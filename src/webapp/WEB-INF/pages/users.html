@@ -4,17 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>SHOW_ALL_&_OPEN_CREATE_NEW_USER</title>
+    <style>
+        table {
+            width: 100%;
+            border: 4px double black;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            background: #eee8aa; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг содержимого ячеек */
+            border: 1px solid black; /* Граница вокруг ячеек */
+        }
+    </style>
 </head>
 <body>
 <div>
     <table>
+
         <th:block th:each="user : ${allUsers}" th:object="${user}">
             <tr id="tr_id">
+
+                <form th:method="get" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}">
+
                 <td id="t_id" class="filterable-cell" th:text="*{id}"></td>
                 <td><a th:href="@{/user/__*{id}__}" id="t_name" class="filterable-cell" th:text="*{firstName}"></a></td>
                 <td id="t_last_name" class="filterable-cell" th:text="*{lastName}"></td>
                 <td id="t_email" class="filterable-cell" th:text="*{email}"></td>
+                <td><input type="submit" value="Edit"/></td>
+                </form>
             </tr>
+        </th:block>
+
         </th:block>
     </table>
 </div>

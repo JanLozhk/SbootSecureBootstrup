@@ -12,16 +12,14 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     // Метод, указывающий на класс конфигурации
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;/*new Class[]{
-                HibernateConfig.class
-        };*/
+        return null;
     }
 
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
-                WebConfig.class
+                WebConfig.class, //HibernateConfig.class
         };
     }
 

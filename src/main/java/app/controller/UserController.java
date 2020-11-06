@@ -2,7 +2,6 @@ package app.controller;
 
 import app.model.User;
 import app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,20 +16,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
-   /* public UserController() {
-        System.out.println("!!!");
-    }*/
-
-/*    @GetMapping("")
-    public String findUser(ModelMap user, @RequestParam(required = false) User user) {
-//        cars(ModelMap model, @RequestParam(required = false) Integer count) {
-
-        List<User> usersList = userServiceImpl.findUser();
-        user.addAttribute("usersList", usersList);
-        return "users";
-    }*/
-
     @GetMapping
     public String helloPage() {
         return "/mainpage";
@@ -39,7 +24,6 @@ public class UserController {
     @GetMapping("/all")
     public String allUsers(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
-     //   System.out.println("GetMapping_AllUsers" + userService.getAllUsers());
         return "users";
     }
 
@@ -59,14 +43,14 @@ public class UserController {
 
     @PostMapping
     public String createNewUser(@ModelAttribute("user") User user){
-        userService.create(user);//add(user);//save(user);//add(user);
+        userService.create(user);
         return "redirect:user/all";
     }
 
     @PostMapping("/{id}")
-    public String postEdit(/*@PathVariable Long id,*/ @ModelAttribute() User user) {
+    public String postEdit(@ModelAttribute() User user) {
         userService.update(user);
-        return "redirect:all";//"users"; ВЫВОДИТ ОГРЫЗОК СТРАНИЦЫ USERS
+        return "redirect:all";
     }
 
     @DeleteMapping("/{id}")
@@ -74,33 +58,7 @@ public class UserController {
         userService.delete(id);
         return "redirect:all";
     }
-/*    @PostMapping
-    public String create(@ModelAttribute("user") User user){
-        userServiceImpl.create(user);//add(user);//save(user);//add(user);
-        return "/user";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") long id){
-        model.addAttribute("user", userServiceImpl.update(id));//getById(id));//show(id));//);
-        return "edit";
-    }
-
-    @PatchMapping("/{id}")
-    public String udgate(@ModelAttribute("user") User user, @PathVariable("id") long id){
-        userServiceImpl.update(id, user);//update(id, user);//edit(user);
-        return "redirect:/user";
-    }
-
-    @DeleteMapping("/{id}")
-    public String delete(@ModelAttribute("user") User user, @PathVariable("id") long id){
-        userServiceImpl.delete(id);
-        return "redirect:/user";
-    }*/
-// public create(){
-
 }
-
 /*Условие:
 Перейдем к созданию рабочего web-приложения. Все ключевые моменты были рассмотрены в предыдущих задачах. Теперь вам требуется их сопоставить и связать в один проект.
 Используя наработки по mvc и hibernate соберите CRUD-приложение.
