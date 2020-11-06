@@ -9,9 +9,8 @@
 <body>
 <table>
     <tr align="right" valign="top">
-<!--    <tr><a th:href="/user/all">BackToAllUsers</a></tr>-->
-<!--        <tr th:method="post" th:action="@{/edit/__*{id}__}" th:object="${user}">-->
-        <form th:method="post" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}"><!--(id=${user.getId()}) ПРОВЕРИТЬ И ТАК *{id} ТОЖЕ, УДАЛИТЬ ЗАПУСТИТЬ ;)))) МОЖЕТ БЫТЬ-->
+
+        <form th:method="post" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}">
             <th:block><label for="id"></label></th:block>
             <th:block><input readonly type="number" th:field="*{id}" id="id"/></th:block>
             <td><label for="name">Enter name</label></td>
