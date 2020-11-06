@@ -1,7 +1,8 @@
 package app.service;
 
+import app.dao.UserDao;
 import app.model.User;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,51 +13,39 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-//    User userNew = new User("Lokal", "Moka", "Toka");
+    private final UserDao userDao;
 
-    @PersistenceContext
-    EntityManager entityManager;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override
     public void create(User user) {
-        entityManager.persist(user);
+        userDao.create(user);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createQuery("select u from User u", User.class).getResultList();
+        return userDao.getAllUsers();
     }
 
     @Transactional
     @Override
-    public void update(User toSave) {
-//        User user = findUserById(toSave.getId());
-//        BeanUtils.copyProperties(toSave, user);
-        entityManager.merge(toSave);
+    public void update(User user) {
+        userDao.update(user);
     }
-
 
     @Transactional
     @Override
     public void delete(long id) {
-        entityManager.remove(findUserById(id));
+        userDao.delete(id);
     }
 
-/*    @Override
-    public User findUser(String name) {
-        return null;
-    }*/
-
+    @Transactional//transactional javax?
     @Override
     public User findUserById(long id) {
-        System.out.println(entityManager.find(User.class, id));
-        return entityManager.find(User.class, id);
+        return userDao.findUserById(id);
     }
-
-    /*@Override
-    public List<User> userListByModelAndSeries(String model, int series) {
-        return null;
-    }*/
 }
