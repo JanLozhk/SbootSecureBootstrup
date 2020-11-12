@@ -16,6 +16,7 @@ public interface UserDao {
 
 //    User findUser(String name);
     User findUserById(long id); //User user
+    User findUserByLogin(String login); //User user
 //    List<User> userListByModelAndSeries(String model, int series);
 
 }

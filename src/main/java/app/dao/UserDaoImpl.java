@@ -5,9 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
+@Repository//не проксируются, объявление бинами @Bean
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
@@ -25,7 +26,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) {
-
         entityManager.merge(user);
     }
 
@@ -38,5 +38,13 @@ public class UserDaoImpl implements UserDao {
     public User findUserById(long id) {
         System.out.println(entityManager.find(User.class, id));
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User findUserByLogin(String login) {
+        TypedQuery<User> query = entityManager.createQuery(
+                "from User u where u.login = :login ", User.class);
+        query.setParameter("login", login);
+        return query.getSingleResult();
     }
 }

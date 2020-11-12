@@ -1,24 +1,29 @@
 package app.service;
 
+import app.dao.AuthorityDaoImpl;
 import app.dao.UserDao;
+import app.model.Authority;
 import app.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
-@Service
+@Service//не проксируются, объявление бинами @Bean
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
-
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private AuthorityDaoImpl authorityDao;
 
     @Transactional
     @Override
     public void create(User user) {
+        Authority authority =  authorityDao.findByAuthority("USER");
+        user.setAuthorityList(Collections.singletonList(authority));
         userDao.create(user);
     }
 
@@ -31,7 +36,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void update(User user) {
-        userDao.update(user);
+        User old = userDao.findUserById(user.getId());
+        old.setLogin(user.getLogin());
+        old.setFirstName(user.getFirstName());
+        old.setLastName(user.getLastName());
+        old.setEmail(user.getEmail());
+        userDao.update(old);
     }
 
     @Transactional
@@ -44,5 +54,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(long id) {
         return userDao.findUserById(id);
+    }
+
+    @Transactional
+    @Override
+    public User findByLogin(String login) {
+        return userDao.findUserByLogin(login);
     }
 }

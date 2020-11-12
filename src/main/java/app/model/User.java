@@ -1,13 +1,14 @@
 package app.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user1")
+//@Table(name = "user1")
 public class User {
 
    @Id
-   @GeneratedValue//(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @Column(name = "first_name")
@@ -18,6 +19,27 @@ public class User {
 
    @Column(name = "email")
    private String email;
+
+   @Column(name = "login", unique = true)
+   private String login;
+
+   @Column(name = "password")
+   private String password;
+
+
+   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}/*, fetch = FetchType.EAGER*/)
+   @JoinTable(
+           name = "user_authority",
+           joinColumns = { @JoinColumn(name = "user_id") },
+           inverseJoinColumns = { @JoinColumn(name = "authority_id") }
+   )
+   List<Authority> authorityList;
+
+   /* @Column
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_role"))
+    private Set<Role> roles;*/
 
    public User() {
    }
@@ -74,5 +96,29 @@ public class User {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   public String getLogin() {
+      return login;
+   }
+
+   public void setLogin(String login) {
+      this.login = login;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public List<Authority> getAuthorityList() {
+      return authorityList;
+   }
+
+   public void setAuthorityList(List<Authority> authorityList) {
+      this.authorityList = authorityList;
    }
 }
