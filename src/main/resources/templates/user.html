@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USER</title>
+    <style>
+        table {
+            width: 100%;
+            border: 4px double black;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            background: #eee8aa; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг содержимого ячеек */
+            border: 1px solid black; /* Граница вокруг ячеек */
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/logout}">Logout</a>
+<div>
+<!--    <table>-->
+
+
+        <table th:object="${user}" >
+            <thead>
+            <h2 align="center">User List</h2>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Mail</th>
+            </thead> <tr>
+                <tbody>
+<!--                <td><label for="id"></label></td>-->
+                <td><b th:text="*{id}" id="id"></b></td>
+<!--                <td><label for="login">Login</label></td>-->
+                <td><b th:text="*{login}" id="login"></b></td>
+<!--                <td><label for="name">First name</label></td>-->
+                <td><b th:text="*{firstName}" id="name"></b></td>
+<!--                <td><label for="SecondName">Second name</label></td>-->
+                <td><b th:text="*{lastName}" id="SecondName"></b></td>
+<!--                <td><label for="Email">E-Mail</label></td>-->
+                <td><b th:text="*{email}" id="Email"></b></td>
+            </tbody>
+            </tr>
+        </table>
+</body>
+</html>

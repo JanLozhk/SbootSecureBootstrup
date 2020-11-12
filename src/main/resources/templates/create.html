@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD_NEW_USER</title>
+    <style>
+        table {
+            width: 100%;
+            border: 4px double black;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            background: #eee8aa; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг содержимого ячеек */
+            border: 1px solid black; /* Граница вокруг ячеек */
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/logout}">Logout</a>
+<table class="click-table" id="user_table">
+    <tr>
+        <thead>
+        <h2 align="center">Create User</h2>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>email</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        <form th:method="post" th:action="@{/admin}" th:object="${user}">
+<!--            <th><label for="name">Enter name</label></th>-->
+            <th><input required type="text" th:field="*{login}" id="login"/></th>
+            <th><input required type="text" th:field="*{password}" id="password"/></th>
+            <th><input required type="text" th:field="*{firstName}" id="name"/></th>
+<!--            <th><label for="SecondName">Enter SecondName</label></th>-->
+            <th><input required type="text" th:field="*{lastName}" id="SecondName"/></th>
+<!--            <th><label for="Email">Enter E-Mail</label></th>-->
+            <th><input required type="text" th:field="*{email}" id="Email"/></th>
+            <th><input type="submit" value="Accept"/></th>
+        </form>
+        </tbody>
+    </tr>
+</table>
+<a href="/admin/all"><input type="button" value="BackToList"></a>
+</body>
+</html>
