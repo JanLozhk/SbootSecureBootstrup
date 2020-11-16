@@ -28,19 +28,19 @@ public class HibernateConfig {
     @Autowired//@Resource
     private Environment environment;
 
-    private Properties hibernateProperties() {
+/*    private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         return properties;
-    }
+    }*/
 
     private String persistenceUnitName() {
         return getClass().getSimpleName();
     }
 
-    @Bean
+  /*  @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setPersistenceUnitName(persistenceUnitName());
@@ -52,14 +52,14 @@ public class HibernateConfig {
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactoryBean.setJpaProperties(hibernateProperties());
         return entityManagerFactoryBean;
-    }
+    }*/
 
-    @Bean
+/*    @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
-    }
+    }*/
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){

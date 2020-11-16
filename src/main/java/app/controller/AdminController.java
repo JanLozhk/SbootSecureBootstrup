@@ -5,6 +5,7 @@ import app.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,14 +26,17 @@ public class AdminController {
 
     @GetMapping("/all")
     public String getAllUsers(Model model) {
+//        model.addAttribute("roles", userService.getAllRoles)
+
         model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("user", new User());
         return "users";
     }
 
     @GetMapping("/{id}")
     public String getEdit(Model model, @PathVariable Long id) {
         User user = userService.findUserById(id);
-        System.out.println(user.toString());
+        System.out.println(user);
         System.out.println("model" + model);
         model.addAttribute("user", user);
         return "/edit";
@@ -58,6 +62,6 @@ public class AdminController {
     @DeleteMapping("/{id}")
     public String deleteUserById(@PathVariable Long id) {
         userService.delete(id);
-        return "redirect:all";
+        return "redirect:/admin/all"; // return "redirect: /all" не редиректится по RequesеMapping, даже по абсолютному пути
     }
 }

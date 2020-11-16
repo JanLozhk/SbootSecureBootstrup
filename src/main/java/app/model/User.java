@@ -44,6 +44,23 @@ public class User {
    public User() {
    }
 
+   public User(String firstName, String lastName, String email, String login, String password) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.login = login;
+      this.password = password;
+   }
+
+   public User(String firstName, String lastName, String email, String login, String password, List<Authority> authorityList) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.login = login;
+      this.password = password;
+      this.authorityList = authorityList;
+   }
+
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;

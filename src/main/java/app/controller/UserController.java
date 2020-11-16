@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping
     public String user(/*Principal principal*/ Model model) { //@AuthenticationPrincipal
 //        String username = principal.getName();
-        User user = userService.findByLogin("USER");
+        User user = userService.findByLogin("admin");
         model.addAttribute("user", user);
         return "user";
     }
