@@ -128,9 +128,9 @@
                                                 </button>
                                             </div>
                                             <div class="btn-group">
-                                                <a th:href="@{'/admin/__*{id}__'}"
-                                                   class="btn btn-danger">Delete</a>
-
+                                                <form th:method="delete" th:action="@{'/admin/__${user.id}__'}">
+                                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

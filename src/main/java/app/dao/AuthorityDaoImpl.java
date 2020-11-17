@@ -1,16 +1,16 @@
 package app.dao;
 
 import app.model.Authority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 @Repository //не проксируются, объявление бинами @Bean
 public class AuthorityDaoImpl {
 
-    @PersistenceContext
+    @Autowired
     EntityManager entityManager;
 
     public void create(Authority authority) {
