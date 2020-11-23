@@ -5,8 +5,15 @@ import app.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,9 +33,10 @@ public class AdminController {
     }
 
     @GetMapping("/all")
-    public String getAllUsers(Model model) {
+    public String getAllUsers(Model model, Principal principal) {
 //        model.addAttribute("roles", userService.getAllRoles)
-
+        User user = userService.findByLogin(principal.getName());
+        model.addAttribute("aurhorizedUser", user);
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("user", new User());
         return "users";

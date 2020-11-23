@@ -1,6 +1,14 @@
 package app.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
@@ -25,6 +33,8 @@ public class User {
 
    @Column(name = "password")
    private String password;
+
+   private String age;
 
 
    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}/*, fetch = FetchType.EAGER*/)
@@ -71,6 +81,14 @@ public class User {
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;
+   }
+
+   public String getAge() {
+      return age;
+   }
+
+   public void setAge(String age) {
+      this.age = age;
    }
 
    public Long getId() {
